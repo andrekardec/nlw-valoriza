@@ -14,12 +14,12 @@ class CreateUserService {
     const usersRepository = getCustomRepository(UsersRepository);
 
     if (!email) {
-      throw new Error("Email incorrect");
+      throw new Error("Email is required.");
     }
 
     const userAlreadyExists = await usersRepository.findOne({ email });
     if (userAlreadyExists) {
-      throw new Error("User already exists");
+      throw new Error("User already exists.");
     }
 
     const user = usersRepository.create({
