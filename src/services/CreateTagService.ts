@@ -6,18 +6,15 @@ class CreateTagService {
   async execute(name: string) {
     const tagsRepository = getCustomRepository(TagsRepository)
 
-    if (!name) {
+    if (!name)
       throw new Error("Name is required.");
-    }
+
 
     const tagAlreadyExists = await tagsRepository.findOne(name);
-
-    if (tagAlreadyExists) {
+    if (tagAlreadyExists)
       throw new Error("Name already exists.")
-    }
 
     const tag = tagsRepository.create({ name })
-
     await tagsRepository.save(tag);
 
     return tag;
